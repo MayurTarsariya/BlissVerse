@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(if \\(Test-Path node_modules\\\\lucide-react\\) { \"lucide-react INSTALLED: \" + \\(Get-Content node_modules\\\\lucide-react\\\\package.json | ConvertFrom-Json\\).version } else { \"lucide-react NOT installed\" })",
+      "PowerShell(npm install *)",
+      "PowerShell(npx tsc --noEmit)",
+      "PowerShell($v = \\(Get-Content node_modules\\\\lucide-react\\\\package.json | ConvertFrom-Json\\).version; \"version: $v\"; Get-ChildItem node_modules\\\\lucide-react\\\\dist\\\\lucide-react.d.ts -ErrorAction SilentlyContinue | Select-Object Name; \\(Get-ChildItem node_modules\\\\lucide-react\\\\dist\\\\esm\\\\icons -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'instagram|youtube|gram|tube' } | Select-Object -ExpandProperty Name\\) -join ', ')",
+      "PowerShell(npx tsc --noEmit; if \\($?\\) { \"TYPECHECK OK\" })",
+      "PowerShell(npm run *)",
+      "PowerShell(Remove-Item *)"
+    ]
+  }
+}
