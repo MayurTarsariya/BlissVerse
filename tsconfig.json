@@ -30,5 +30,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  // `design_components` is a standalone reference project with its own tsconfig
+  // and path aliases. Drop this entry once the folder is deleted.
+  "exclude": ["node_modules", "design_components"]
 }

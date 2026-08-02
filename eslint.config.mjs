@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone design reference; delete this entry with the folder.
+    "design_components/**",
   ]),
 ]);
 

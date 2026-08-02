@@ -7,7 +7,9 @@
       "PowerShell($v = \\(Get-Content node_modules\\\\lucide-react\\\\package.json | ConvertFrom-Json\\).version; \"version: $v\"; Get-ChildItem node_modules\\\\lucide-react\\\\dist\\\\lucide-react.d.ts -ErrorAction SilentlyContinue | Select-Object Name; \\(Get-ChildItem node_modules\\\\lucide-react\\\\dist\\\\esm\\\\icons -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'instagram|youtube|gram|tube' } | Select-Object -ExpandProperty Name\\) -join ', ')",
       "PowerShell(npx tsc --noEmit; if \\($?\\) { \"TYPECHECK OK\" })",
       "PowerShell(npm run *)",
-      "PowerShell(Remove-Item *)"
+      "PowerShell(Remove-Item *)",
+      "Bash(npx next *)",
+      "PowerShell(Get-ChildItem -Recurse -File design_components | Select-Object @{n='Path';e={$_.FullName.Replace\\(\\(Get-Location\\).Path + '\\\\',''\\)}}, @{n='KB';e={[math]::Round\\($_.Length/1kb,1\\)}} | Format-Table -AutoSize)"
     ]
   }
 }

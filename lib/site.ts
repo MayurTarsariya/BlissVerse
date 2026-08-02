@@ -20,6 +20,21 @@ export const MARKETPLACES = {
   flipkart: "https://www.flipkart.com/",
 } as const;
 
+/**
+ * "Shop More" destination.
+ * TODO: swap for the real brand store URL once it's live — it looks like
+ * https://www.amazon.in/stores/BLISSVERSE/page/<STORE-ID>
+ */
+export const AMAZON_BRAND_STORE = MARKETPLACES.amazon;
+
+/** Post-purchase support channels. */
+export const SUPPORT = {
+  email: SITE.email,
+  whatsappNumber: "+91 94099 73003",
+  /** wa.me requires country code, digits only. */
+  whatsappUrl: "https://wa.me/919409973003",
+} as const;
+
 export const NAV_LINKS = [
   { label: "Products", href: "#products" },
   { label: "About", href: "#about" },
@@ -54,7 +69,6 @@ export const FOOTER_COLUMNS = [
     heading: "Support",
     links: [
       { label: SITE.email, href: `mailto:${SITE.email}` },
-      { label: "Warranty claims", href: "#faq" },
       { label: "Shipping & returns", href: "#faq" },
     ],
   },

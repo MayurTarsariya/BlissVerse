@@ -1,15 +1,7 @@
-import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Manrope } from "next/font/google";
 import { SITE } from "@/lib/site";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  // Italic is used for the BLISSVERSE wordmark in the thank-you headline.
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -17,22 +9,33 @@ const manrope = Manrope({
   display: "swap",
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s · ${SITE.name}`,
+    default: `Thank You | ${SITE.name.toUpperCase()}`,
+    template: `%s | ${SITE.name.toUpperCase()}`,
   },
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} — ${SITE.tagline}`,
+    title: `Thank You | ${SITE.name.toUpperCase()}`,
     description: SITE.description,
-    url: SITE.url,
-    siteName: SITE.name,
+    siteName: SITE.name.toUpperCase(),
     locale: "en_IN",
     type: "website",
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -41,14 +44,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en-IN"
-      className={`${fraunces.variable} ${manrope.variable} h-full antialiased`}
-    >
-      <body className="bg-shell flex min-h-full flex-col text-neutral-950">
-        {/* Scroll-in effects start at opacity 0; without JS they'd never reveal. */}
+    <html lang="en-IN" className={`${manrope.variable} ${inter.variable} h-full`}>
+      <body className="flex min-h-full flex-col">
+        {/* Scroll-in effects start at opacity 0; without JS they'd never reveal.
+            A stylesheet !important beats Framer Motion's plain inline style. */}
         <noscript>
-          <style>{`.reveal { opacity: 1 !important; transform: none !important; }`}</style>
+          <style>{`.reveal, .fade-in { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
         {children}
       </body>
