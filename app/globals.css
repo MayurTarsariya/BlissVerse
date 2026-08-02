@@ -1,42 +1,35 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   BLISSVERSE — Design tokens
-   Scandinavian minimal · forest green · warm sand
-   Signature motif: the forest-green dot.
+   Design tokens
+   Display type : Fraunces (serif, 300–600) — headlines only
+   Body / UI    : Manrope (400–700)
+   Both are loaded via next/font in app/layout.tsx and exposed as CSS variables.
 --------------------------------------------------------------------------- */
 
 @theme {
-  /* Color */
+  --color-ink: #0a0a0a;
   --color-paper: #ffffff;
-  --color-card: #fafafa;
-  --color-ink: #1f2937;
-  --color-muted: #6b7280;
-  --color-line: #ececec;
-  --color-forest: #2f6b4f;
-  --color-forest-deep: #234f3a;
-  --color-forest-tint: #edf4f0;
-  --color-sand: #d8c3a5;
-  --color-sand-tint: #f6f0e7;
-  --color-success: #4caf50;
+  --color-cream: #f3ede1;
+  --color-line: #e9e6df;
+  --color-gold: #a9824c;
+  /* Gold tuned for dark backgrounds — meets contrast on ink. */
+  --color-gold-soft: #d8bc86;
 
-  /* Radius */
-  --radius-pill: 999px;
-  --radius-card: 1.5rem;
-  --radius-panel: 2rem;
-
-  /* Shadow */
-  --shadow-soft: 0 1px 2px rgb(31 41 55 / 0.04), 0 8px 24px rgb(31 41 55 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(31 41 55 / 0.05), 0 16px 40px rgb(31 41 55 / 0.1);
-  --shadow-glow: 0 2px 4px rgb(47 107 79 / 0.06), 0 16px 40px rgb(47 107 79 / 0.16);
+  /* Thank-you page palette */
+  --color-shell: #fdfcfa; /* warm off-white page ground */
+  --color-navy: #17293a; /* display headings on light */
+  --color-taupe: #8b7d6b; /* body copy on light */
+  --color-cocoa: #6b4c2e; /* headings inside the cream card */
 }
 
 @theme inline {
-  /* Manrope for headings/UI, Inter for body — loaded in app/layout.tsx. */
-  --font-display: var(--font-manrope);
-  --font-body: var(--font-inter);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-manrope);
 }
+
+/* Fraunces is intentionally NOT registered as a `--font-*` theme token: that
+   would generate a `font-display` utility that collides with the `.font-display`
+   component class below and drop its letter-spacing. */
 
 @layer base {
   html {
@@ -44,86 +37,43 @@
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-    font-size: 1.0625rem; /* 17px */
-    line-height: 1.7;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: var(--color-forest);
-    color: #fff;
+    background: #efe4ce;
+    color: var(--color-ink);
   }
 
-  /* Visible focus for keyboard users only */
-  :focus-visible {
-    outline: 2px solid var(--color-forest);
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
-    border-radius: 4px;
-  }
-}
-
-@layer components {
-  /* Small caps label above a section heading. */
-  .eyebrow {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-forest);
-  }
-
-  /* Horizontal snap scroller — Explore section. */
-  .snap-row {
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .snap-row::-webkit-scrollbar {
-    display: none;
-  }
-
-  .snap-row > * {
-    scroll-snap-align: start;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
+    border-radius: 6px;
   }
 }
 
 /* ---------------------------------------------------------------------------
-   LEGACY — black/gold landing page (commented out in app/page.tsx).
-   Kept so those components still render if that page is ever restored.
-   Nothing in the live thank-you flow uses anything below this line.
+   Components
+   Declared in the components layer so Tailwind utilities always win when a
+   caller needs to override (e.g. `btn btn-ink px-10`).
 --------------------------------------------------------------------------- */
 
-@theme {
-  --color-gold: #a9824c;
-  --color-gold-soft: #d8bc86;
-  --color-cream: #f3ede1;
-}
-
 @layer components {
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+    letter-spacing: -0.015em;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -145,7 +95,7 @@
   }
 
   .btn-ink {
-    background: #0a0a0a;
+    background: var(--color-ink);
     color: #fff;
   }
 
@@ -156,13 +106,45 @@
 
   .btn-line {
     border: 1px solid #cfcbc2;
-    color: #0a0a0a;
+    color: var(--color-ink);
     background: transparent;
   }
 
   .btn-line:hover {
-    border-color: #0a0a0a;
+    border-color: var(--color-ink);
     transform: translateY(-2px);
+  }
+
+  /* On dark backgrounds. */
+  .btn-ghost {
+    background: rgb(255 255 255 / 0.08);
+    color: #fff;
+    border: 1px solid rgb(255 255 255 / 0.25);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-gold-soft);
+    transform: translateY(-2px);
+  }
+
+  .btn-gold {
+    background: var(--color-gold);
+    color: #fff;
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -16px rgb(169 130 76 / 0.65);
+  }
+
+  .btn-paper {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .btn-paper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -16px rgb(255 255 255 / 0.25);
   }
 
   .card-lift {
@@ -202,5 +184,56 @@
     border-radius: 9999px;
     filter: blur(70px);
     pointer-events: none;
+  }
+
+  .drift-1 {
+    animation: drift-1 14s ease-in-out infinite;
+  }
+
+  .drift-2 {
+    animation: drift-2 18s ease-in-out infinite;
+  }
+}
+
+@keyframes drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(48px, -36px);
+  }
+}
+
+@keyframes drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-40px, 30px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .drift-1,
+  .drift-2 {
+    animation: none;
+  }
+
+  .card-lift,
+  .btn,
+  .zoom-img {
+    transition: none;
   }
 }

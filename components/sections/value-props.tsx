@@ -21,7 +21,7 @@ const VALUE_PROPS = [
   {
     Icon: Headphones,
     title: "Human support",
-    body: "Real people, one-business-day replies, seven days a week.",
+    body: "Real people, one-business-day replies, 12-month warranty.",
   },
 ];
 

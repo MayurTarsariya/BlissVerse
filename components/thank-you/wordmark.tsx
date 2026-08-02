@@ -1,18 +1,17 @@
 import { SITE } from "@/lib/site";
 
-/** BLISSVERSE lockup with the signature forest dot. */
-export function Wordmark({ size = "md" }: { size?: "sm" | "md" }) {
-  const text = size === "sm" ? "text-sm" : "text-lg";
-  const dot = size === "sm" ? "size-1" : "size-1.5";
-
+/** "BLISSVERSE ·" lockup — letterspaced, with the gold dot. */
+export function Wordmark({ onDark = false }: { onDark?: boolean }) {
   return (
-    <span className="flex items-baseline gap-1">
-      <span
-        className={`font-display ${text} text-ink font-extrabold tracking-[0.22em]`}
-      >
-        {SITE.name.toUpperCase()}
+    <p
+      className={`eyebrow flex items-center gap-1.5 ${
+        onDark ? "text-white" : "text-navy"
+      }`}
+    >
+      {SITE.name.toUpperCase()}
+      <span aria-hidden="true" className={onDark ? "text-gold-soft" : "text-gold"}>
+        ·
       </span>
-      <span aria-hidden="true" className={`${dot} bg-forest mb-0.5 rounded-full`} />
-    </span>
+    </p>
   );
 }

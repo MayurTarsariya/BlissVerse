@@ -139,6 +139,10 @@ export const FAQS: Faq[] = [
     a: "Every product follows the marketplace's standard return window — typically 7–10 days, no questions asked. Returns are picked up from your door and refunded by the marketplace.",
   },
   {
+    q: "Is there a warranty?",
+    a: "Yes — every Blissverse product carries a 12-month warranty. Write to us with your marketplace order ID and we'll repair or replace it.",
+  },
+  {
     q: "How do I reach support?",
     a: "Email blissverse6@gmail.com — a real person replies within one business day, seven days a week. No bots, no ticket mazes.",
   },
@@ -182,6 +186,6 @@ export const STANDARDS: Standard[] = [
   {
     n: "04",
     t: "Care after purchase",
-    d: "Human support and marketplace-backed returns. The sale is the start.",
+    d: "12-month warranty, human support and marketplace-backed returns. The sale is the start.",
   },
 ];
